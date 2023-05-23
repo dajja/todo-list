@@ -19,6 +19,7 @@ const Input = (props: PropsType) => {
         e.preventDefault();
         axios.post("http://localhost:3000/list", newData)
             .then(res => {
+                console.log(res);
                 setTogle(!togle);
                 titleRef.current!.value = "";
                 descriptionRef.current!.value = "";

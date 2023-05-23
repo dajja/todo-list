@@ -12,14 +12,15 @@ const Update = () => {
     const [selectedData, setSelectedData] = useState<DataProps>({ title: '', description: '' });
     const { id } = useParams();
     const navigate = useNavigate();
-    console.log(id);
     const handleSubmit = (e : any) => {
         e.preventDefault();
         axios.put("http://localhost:3000/list/" + id, selectedData)
         .then(res => {
+            console.log(res);
             alert("Successfully");
             navigate("/");
         })
+        .catch(err => console.log(err));
     }
     useEffect(() => {
         axios.get("http://localhost:3000/list/" + id)
