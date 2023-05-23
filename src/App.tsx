@@ -1,16 +1,11 @@
 import './App.css';
 import Input from './components/Input';
 import List from './components/List';
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import axios from 'axios';
+import { DataProps } from './type';
 
-interface DataProps {
-  id: number,
-  title: string,
-  description: string,
-  completed: boolean
-}
-const App = () => {
+const App = () : ReactNode => {
   const [data, setData] = useState<DataProps[]>([]);
   const [togle, setTogle ] = useState<boolean>(true);
   useEffect(() => {

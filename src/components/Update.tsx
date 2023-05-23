@@ -1,18 +1,18 @@
 import '../App.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
-interface DataProps {
+type DataProps = {
     id?: number,
     title: string,
     description: string,
     completed?: boolean
 }
-const Update = () => {
+const Update = () : ReactNode => {
     const [selectedData, setSelectedData] = useState<DataProps>({ title: '', description: '' });
     const { id } = useParams();
     const navigate = useNavigate();
-    const handleSubmit = (e : any) => {
+    const handleSubmit: (e: any) => void = (e) => {
         e.preventDefault();
         axios.put("http://localhost:3000/list/" + id, selectedData)
         .then(res => {
