@@ -1,20 +1,15 @@
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-interface PropsType {
-    data: any[],
-    setTogle: React.Dispatch<React.SetStateAction<boolean>>,
-    togle: boolean
+import { DataProps, PropsType } from "../type";
+import { ReactElement } from 'react';
+
+type Props = PropsType & {
+    data: DataProps[],
 }
-interface DataProps {
-    id: number,
-    title: string,
-    description: string,
-    completed: boolean
-}
-const List = (props: PropsType) => {
+const List = (props: Props) : ReactElement=> {
     const { data, togle, setTogle } = props;
     const navigate = useNavigate();
-    const deleteTask = (e: number) => {
+    const deleteTask : (e: number) => void = (e) => {
         axios.delete("http://localhost:3000/list/" + e)
             .then(res => {
                 setTogle(!togle);
@@ -22,7 +17,7 @@ const List = (props: PropsType) => {
             })
             .catch(err => console.log(err));
     }
-    const endTask = (item: DataProps) => {
+    const endTask : (item : DataProps) => void = (item) => {
         axios.put(`http://localhost:3000/list/${item.id}`, {
             title: item.title,
             description: item.description,

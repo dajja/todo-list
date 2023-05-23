@@ -1,21 +1,18 @@
-import { useState, useRef } from "react";
+import { useState, useRef, ReactElement } from "react";
 import axios from "axios";
-interface DataProps {
+import { PropsType } from "../type";
+type DataProps = {
     id?: number,
     title: string,
     description: string,
     completed: boolean
 }
-interface PropsType {
-    setTogle: React.Dispatch<React.SetStateAction<boolean>>,
-    togle: boolean
-}
-const Input = (props: PropsType) => {
+const Input = (props: PropsType) : ReactElement=> {
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const { setTogle, togle } = props;
     const [newData, setNewData] = useState<DataProps>({ title: '', description: '', completed: false });
-    const handleSubmit = (e: any) => {
+    const handleSubmit: (e: any) => void = (e) => {
         e.preventDefault();
         axios.post("http://localhost:3000/list", newData)
             .then(res => {
